@@ -34,4 +34,7 @@ jobs:
         pip install -r requirements.txt 
 
     - name: Browser Init
-      run: rfbrowser init   
+      run: rfbrowser init
+      
+    - name: Run E2E Tests
+      run: robot -d ./logs -i smoke tests 
