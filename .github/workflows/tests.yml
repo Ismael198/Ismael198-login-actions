@@ -41,4 +41,16 @@ jobs:
       uses: joonvena/robotframework-reporter-action@v2.4
       with:
         gh_access_token: ${{ secrets.ROBOT_REPORTER_TOKEN }}
-        report_path: logs 
+        report_path: logs
+
+    - name: Upload Reporter
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: Tests Report
+        path: logs
+
+
+    
+
+
+    
