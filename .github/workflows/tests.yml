@@ -32,10 +32,8 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r requirements.txt 
+        pip install robotframework-seleniumlibrary
 
-    - name: Initialize Selenium environment
-      run: |
-        rfbrowser init
-      
     - name: Run E2E Tests
       run: robot -d ./logs -i smoke tests 
+
