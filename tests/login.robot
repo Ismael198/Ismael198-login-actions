@@ -29,7 +29,7 @@ Casos de Testes 03 - Senha deve ser obrigatória
 
 Casos de Testes 04 - Login com sucesso
     [Documentation]  Este teste verifica acesso com suceso loginxp.vercel.app
-    [Tags]           smoke
+    [Tags]           sucesso
     Dado acessar a home page do site 
     Quando digitar o login e senha "CORRETAMENTE"
     Então deverá retornar um modal com a mensagem "Tudo certo!"
