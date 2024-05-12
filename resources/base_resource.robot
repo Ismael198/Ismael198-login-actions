@@ -19,6 +19,7 @@ Abrir o navegador
     Run Keyword If    '${HEADLESS_OPTION}'=='True'    Call Method    ${options}    add_argument    --headless
     Open Browser       ${BASE_URL}    browser=${BROWSER}    options=${options}
 
+
 Fechar o navegador
     Capture Page Screenshot     
     Close Browser
