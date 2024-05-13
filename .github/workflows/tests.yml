@@ -9,84 +9,64 @@ on:
 
 jobs:
   chrome:
-
     runs-on: ubuntu-latest
-    
     steps:
     - name: Get code
       uses: actions/checkout@v4.1.5
-
     - name: Use Node.js 20
       uses: actions/setup-node@v4.0.2
       with:
         node-version: 20
-
     - name: Setup Python
       uses: actions/setup-python@v5.1.0
       with:
         python-version: 3.12
-
     - name: Install Python dependencies
       run: |
         pip install --upgrade pip
-        pip install -r requirements.txt 
+        pip install -r requirements.txt
         pip install robotframework-seleniumlibrary
-
+    - name: Install Allure Command Line
+      run: |
+        wget -q -O - https://dl.bintray.com/qameta/generic/install.sh | bash && \
+        sudo mv /usr/local/bin/allure /usr/bin
     - name: Run E2E Tests
-      run: robot -d ./logs -v BROWSER:chrome tests 
-
-    - name: Robot Reporter
-      uses: joonvena/robotframework-reporter-action@v2.4
-      if: always()
+      run: robot --listener allure_robotframework -d ./logs -v BROWSER:chrome tests
+    - name: Generate Allure Report
+      run: allure generate output/allure -o output/allure-report --clean
+    - name: Upload Allure Report
+      uses: actions/upload-artifact@v3
       with:
-        gh_access_token: ${{ secrets.ROBOT_REPORTER_TOKEN }}
-        report_path: logs
-
-    - name: Upload Reporter
-      uses: actions/upload-artifact@v4.3.1
-      if: always()
-      with:
-        name: Chrome Tests Report
-        path: logs
-
-
+        name: Allure Report
+        path: output/allure-report
   edge:
-
     runs-on: ubuntu-latest
-    
     steps:
     - name: Get code
       uses: actions/checkout@v4.1.5
-
     - name: Use Node.js 20
       uses: actions/setup-node@v4.0.2
       with:
         node-version: 20
-
     - name: Setup Python
       uses: actions/setup-python@v5.1.0
       with:
         python-version: 3.12
-
     - name: Install Python dependencies
       run: |
         pip install --upgrade pip
-        pip install -r requirements.txt 
+        pip install -r requirements.txt
         pip install robotframework-seleniumlibrary
-
+    - name: Install Allure Command Line
+      run: |
+        wget -q -O - https://dl.bintray.com/qameta/generic/install.sh | bash && \
+        sudo mv /usr/local/bin/allure /usr/bin
     - name: Run E2E Tests
-      run: robot -d ./logs -v BROWSER:edge tests 
-
-    - name: Robot Reporter
-      uses: joonvena/robotframework-reporter-action@v2.4
-      if: always()
+      run: robot --listener allure_robotframework -d ./logs -v BROWSER:edge tests
+    - name: Generate Allure Report
+      run: allure generate output/allure -o output/allure-report --clean
+    - name: Upload Allure Report
+      uses: actions/upload-artifact@v3
       with:
-        gh_access_token: ${{ secrets.ROBOT_REPORTER_TOKEN }}
-        report_path: logs
-
-    - name: Upload Reporter
-      uses: actions/upload-artifact@v4.3.1
-      if: always()
-      with:
-        name: Edge Tests Report
-        path: logs        
+        name: Allure Report
+        path: output/allure-report

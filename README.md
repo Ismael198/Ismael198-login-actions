@@ -24,3 +24,12 @@ robot -d ./logs -v IS_HEADLESS:True tests
 robot -d ./logs -v IS_HEADLESS:False tests
 ```
 
+4. Executar testes para gerar relatório no Allure
+```
+robot --listener allure_robotframework -d ./logs tests 
+```
+
+5. Executar para gerar relatório no Allure
+```
+allure serve output/allure
+```
