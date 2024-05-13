@@ -27,9 +27,7 @@ jobs:
         pip install -r requirements.txt
         pip install robotframework-seleniumlibrary
     - name: Install Allure Command Line
-      run: |
-        wget -q -O - https://dl.bintray.com/qameta/generic/install.sh | bash && \
-        sudo mv /usr/local/bin/allure /usr/bin
+      run: npm install -g allure-commandline --force 
     - name: Run E2E Tests
       run: robot --listener allure_robotframework -d ./logs -v BROWSER:chrome tests
     - name: Generate Allure Report
@@ -58,9 +56,7 @@ jobs:
         pip install -r requirements.txt
         pip install robotframework-seleniumlibrary
     - name: Install Allure Command Line
-      run: |
-        wget -q -O - https://dl.bintray.com/qameta/generic/install.sh | bash && \
-        sudo mv /usr/local/bin/allure /usr/bin
+      run: npm install -g allure-commandline --force
     - name: Run E2E Tests
       run: robot --listener allure_robotframework -d ./logs -v BROWSER:edge tests
     - name: Generate Allure Report
